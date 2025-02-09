@@ -14,6 +14,7 @@ export default class TicketService {
     let adultTickets = 0;
     let childTickets = 0;
     let infantTickets = 0;
+    let totalSeats = 0;
 
     ticketTypeRequests.forEach(request => {
       const type = request.getTicketType();
@@ -23,12 +24,14 @@ export default class TicketService {
       if (type === 'ADULT') {
         totalCost += count * 25;
         adultTickets += count;
+      
       } else if (type === 'CHILD') {
         totalCost += count * 15;
         childTickets += count;
       } else if (type === 'INFANT') {
         infantTickets += count;
       }
+      totalSeats = adultTickets + childTickets;
     });
 
     if (totalTickets > 25) {
@@ -39,9 +42,8 @@ export default class TicketService {
       throw new InvalidPurchaseException('Child and Infant tickets cannot be purchased without an Adult ticket');
     }
 
-    let message = `Tickets for ${adultTickets} adults, ${childTickets} children and ${infantTickets} infants, costs ${totalCost} pounds`;
+    let message = `Tickets for ${adultTickets} adults, ${childTickets} children and ${infantTickets} infants, costs ${totalCost} pounds and number of seats reserved:${totalSeats}`;
     
-    const totalSeats = adultTickets + childTickets;
     const paymentService = new TicketPaymentService();
     const seatService = new SeatReservationService();
     

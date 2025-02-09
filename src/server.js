@@ -14,7 +14,9 @@ app.post('/purchase', (req, res) => {
     const ticketService = new TicketService();
     ticketService.purchaseTickets(accountId, ...ticketRequests);
     res.status(200).send({ message: 'Tickets purchased successfully' });
-  } catch (error) {
+  } 
+  
+  catch (error) {
     res.status(400).send({ error: error.message });
   }
 });

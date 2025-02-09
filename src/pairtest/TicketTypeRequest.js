@@ -10,16 +10,12 @@ export default class TicketTypeRequest {
       throw new TypeError(`type must be one of ${TicketTypeRequest.Types.join(', ')}`);
     }
     if ( noOfTickets <= 0) {  
-      throw new TypeError('here noOfTickets must be a positive integer');
+      throw new TypeError('noOfTickets for Adults must be greater than 0');
     }
     if (!Number.isInteger(noOfTickets)) {  
-      console.log(typeof(noOfTickets));
+      
       throw new TypeError(typeof(noOfTickets)+'  noOfTickets must be a positive integer');
-
     }
-
-
-    
 
     this.#type = type;
     this.#noOfTickets = noOfTickets;

@@ -9,7 +9,8 @@ app.use(express.json());
 app.post('/purchase', (req, res) => {
   try {
     const { accountId, tickets } = req.body;
-    const ticketRequests = tickets.map(ticket => new TicketTypeRequest(ticket.type, ticket.count));
+    const ticketRequests = tickets.map(ticket => new TicketTypeRequest(ticket.type,ticket.noOfTickets));
+
     const ticketService = new TicketService();
     ticketService.purchaseTickets(accountId, ...ticketRequests);
     res.status(200).send({ message: 'Tickets purchased successfully' });

@@ -1,10 +1,10 @@
-// lib/TicketService.js
 import InvalidPurchaseException from './InvalidPurchaseException.js';
 import TicketPaymentService from '../thirdparty/paymentgateway/TicketPaymentService.js';
 import SeatReservationService from '../thirdparty/seatbooking/SeatReservationService.js';
  
 export default class TicketService {
-  purchaseTickets(accountId, ...ticketTypeRequests) {
+  purchaseTickets(accountId, ...ticketTypeRequests)
+  {
     if (!Number.isInteger(accountId) || accountId <= 0) {
       throw new InvalidPurchaseException('Invalid account ID');
     }
@@ -39,11 +39,15 @@ export default class TicketService {
       throw new InvalidPurchaseException('Child and Infant tickets cannot be purchased without an Adult ticket');
     }
 
+    let message = `Tickets for ${adultTickets} adults, ${childTickets} children and ${infantTickets} infants, costs ${totalCost} pounds`;
+    
     const totalSeats = adultTickets + childTickets;
     const paymentService = new TicketPaymentService();
     const seatService = new SeatReservationService();
     
     paymentService.makePayment(accountId, totalCost);
     seatService.reserveSeat(accountId, totalSeats);
+
+    return message
   }
 }

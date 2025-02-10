@@ -7,9 +7,9 @@ app.use(express.json());
 
 app.post("/purchase", (req, res) => {
   try {
-    const { accountId, tickets } = req.body;
+    const { accountId, tickets } = req.body; 
     const ticketRequests = tickets.map(
-      (ticket) => new TicketTypeRequest(ticket.type, ticket.noOfTickets)
+      (ticket) => new TicketTypeRequest(accountId, ticket.type, ticket.noOfTickets)
     );
 
     const ticketService = new TicketService();

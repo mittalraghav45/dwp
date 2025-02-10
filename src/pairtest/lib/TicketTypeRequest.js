@@ -1,4 +1,3 @@
-//validates ticket types
 export default class TicketTypeRequest {
   static Types = ["ADULT", "CHILD", "INFANT"];
 
@@ -6,11 +5,22 @@ export default class TicketTypeRequest {
   #noOfTickets;
 
   constructor(type, noOfTickets) {
-    if (!TicketTypeRequest.Types.includes(type)) {      
+    this.validateType(type);
+    this.validateNoOfTickets(noOfTickets, type);
+
+    this.#type = type;
+    this.#noOfTickets = noOfTickets;
+  }
+
+  validateType(type) {
+    if (!TicketTypeRequest.Types.includes(type)) {
       throw new TypeError(`type must be one of ${TicketTypeRequest.Types.join(", ")}`);
     }
+  }
+
+  validateNoOfTickets(noOfTickets, type) {
     if (noOfTickets < 0) {
-      throw new TypeError("noOfTickets for Adults must be greater than 0");
+      throw new TypeError("noOfTickets must be a positive integer");
     }
     if (noOfTickets === 0 && type === "ADULT") {
       throw new TypeError("No tickets purchased");
@@ -18,9 +28,6 @@ export default class TicketTypeRequest {
     if (!Number.isInteger(noOfTickets)) {
       throw new TypeError("noOfTickets must be a positive integer");
     }
-
-    this.#type = type;
-    this.#noOfTickets = noOfTickets;
   }
 
   getNoOfTickets() {

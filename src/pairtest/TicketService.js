@@ -1,5 +1,5 @@
 //handles business logic
-import InvalidPurchaseException from "./InvalidPurchaseException.js";
+import InvalidPurchaseException from "./lib/InvalidPurchaseException.js";
 import TicketPaymentService from "../thirdparty/paymentgateway/TicketPaymentService.js";
 import SeatReservationService from "../thirdparty/seatbooking/SeatReservationService.js";
 
@@ -16,7 +16,7 @@ export default class TicketService {
     let infantTickets = 0;
     let totalSeats = 0;
 
-    ticketTypeRequests.forEach((request) => { 
+    ticketTypeRequests.forEach((request) => {
       const type = request.getTicketType();
       const count = request.getNoOfTickets();
 
@@ -45,7 +45,7 @@ export default class TicketService {
       );
     }
 
-    let message = `Cost for ${adultTickets} adults, ${childTickets} children and ${infantTickets} infants is:£${totalCost} .Number of Seats reserved:${totalSeats}`;
+    let message = `Cost for ${adultTickets} adults, ${childTickets} children and ${infantTickets} infants is: £${totalCost} .Number of Seats reserved:${totalSeats}`;
 
     const paymentService = new TicketPaymentService();
     const seatService = new SeatReservationService();

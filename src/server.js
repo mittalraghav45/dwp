@@ -1,6 +1,6 @@
 import express from "express";
 import TicketService from "./pairtest/TicketService.js";
-import TicketTypeRequest from "./pairtest/TicketTypeRequest.js";
+import TicketTypeRequest from "./pairtest/lib/TicketTypeRequest.js";
 
 const app = express();
 app.use(express.json());

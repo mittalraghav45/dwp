@@ -1,4 +1,4 @@
-// lib/TicketTypeRequest.js
+//validates ticket types
 export default class TicketTypeRequest {
   static Types = ['ADULT', 'CHILD', 'INFANT'];
 
@@ -15,8 +15,6 @@ export default class TicketTypeRequest {
     if ( noOfTickets === 0 && type==='ADULT') {  
       throw new TypeError('No tickets purchased');
     }
-
-
     if (!Number.isInteger(noOfTickets)) {  
       
       throw new TypeError('noOfTickets must be a positive integer');

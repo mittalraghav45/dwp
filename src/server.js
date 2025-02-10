@@ -6,7 +6,7 @@ import TicketTypeRequest from "./pairtest/TicketTypeRequest.js";
 const app = express();
 app.use(express.json());
 
-app.post("/purchase", (req, res) => {
+app.post("/purchase", (req, res) => { 
   try {
     const { accountId, tickets } = req.body;
 

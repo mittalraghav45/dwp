@@ -1,3 +1,4 @@
+//handles business logic
 import InvalidPurchaseException from './InvalidPurchaseException.js';
 import TicketPaymentService from '../thirdparty/paymentgateway/TicketPaymentService.js';
 import SeatReservationService from '../thirdparty/seatbooking/SeatReservationService.js';

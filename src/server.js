@@ -1,4 +1,3 @@
-// server.js
 import express from "express";
 import TicketService from "./pairtest/TicketService.js";
 import TicketTypeRequest from "./pairtest/TicketTypeRequest.js";

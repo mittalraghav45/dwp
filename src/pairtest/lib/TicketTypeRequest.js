@@ -4,10 +4,9 @@ export default class TicketTypeRequest {
   #type;
   #noOfTickets;
   #accountId;
-
   constructor(accountId, type, noOfTickets) {
     this.validateType(type);
-    this.validateNoOfTickets(noOfTickets, type,accountId);
+    this.validateNoOfTickets(noOfTickets, type, accountId);
 
     this.#type = type;
     this.#noOfTickets = noOfTickets;
@@ -23,8 +22,7 @@ export default class TicketTypeRequest {
   }
 
   validateNoOfTickets(noOfTickets, type, accountId) {
-
-    if (Number.isInteger(accountId) && accountId >0) { 
+    if (Number.isInteger(accountId) && accountId > 0) {
       if (noOfTickets < 0) {
         throw new TypeError("noOfTickets must be a positive integer");
       }
@@ -34,8 +32,7 @@ export default class TicketTypeRequest {
       if (!Number.isInteger(noOfTickets)) {
         throw new TypeError("noOfTickets must be a positive integer");
       }
-    }
-    else{
+    } else {
       throw new TypeError("Account ID is incorrect");
     }
   }

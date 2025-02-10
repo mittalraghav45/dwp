@@ -7,13 +7,17 @@ app.use(express.json());
 
 app.post("/purchase", (req, res) => {
   try {
-    const { accountId, tickets } = req.body; 
+    const { accountId, tickets } = req.body;
     const ticketRequests = tickets.map(
-      (ticket) => new TicketTypeRequest(accountId, ticket.type, ticket.noOfTickets)
+      (ticket) =>
+        new TicketTypeRequest(accountId, ticket.type, ticket.noOfTickets)
     );
 
     const ticketService = new TicketService();
-    const purchaseMessage = ticketService.purchaseTickets(accountId, ...ticketRequests);
+    const purchaseMessage = ticketService.purchaseTickets(
+      accountId,
+      ...ticketRequests
+    );
 
     res.status(200).send({ message: purchaseMessage });
   } catch (error) {
@@ -23,7 +27,9 @@ app.post("/purchase", (req, res) => {
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).json({ error: "Internal Server Error. Please try again later." });
+  res
+    .status(500)
+    .json({ error: "Internal Server Error. Please try again later." });
 });
 
 app.use((req, res) => {

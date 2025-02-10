@@ -1,18 +1,35 @@
 //handles business logic
 import InvalidPurchaseException from "./lib/InvalidPurchaseException.js";
 import TicketPaymentService from "../thirdparty/paymentgateway/TicketPaymentService.js";
-import SeatReservationService from "../thirdparty/seatbooking/SeatReservationService.js"; 
+import SeatReservationService from "../thirdparty/seatbooking/SeatReservationService.js";
 
 export default class TicketService {
   purchaseTickets(accountId, ...ticketTypeRequests) {
     this.validateAccountId(accountId);
 
-    const { totalTickets, totalCost, adultTickets, childTickets, infantTickets, totalSeats } =
-      this.calculateTicketDetails(ticketTypeRequests);
+    const {
+      totalTickets,
+      totalCost,
+      adultTickets,
+      childTickets,
+      infantTickets,
+      totalSeats,
+    } = this.calculateTicketDetails(ticketTypeRequests);
 
-    this.validateTicketPurchase(totalTickets, adultTickets, childTickets, infantTickets);
+    this.validateTicketPurchase(
+      totalTickets,
+      adultTickets,
+      childTickets,
+      infantTickets
+    );
 
-    const message = this.generatePurchaseMessage(adultTickets, childTickets, infantTickets, totalCost, totalSeats);
+    const message = this.generatePurchaseMessage(
+      adultTickets,
+      childTickets,
+      infantTickets,
+      totalCost,
+      totalSeats
+    );
 
     this.processPaymentAndReservation(accountId, totalCost, totalSeats);
 
@@ -50,20 +67,42 @@ export default class TicketService {
 
     const totalSeats = adultTickets + childTickets;
 
-    return { totalTickets, totalCost, adultTickets, childTickets, infantTickets, totalSeats };
+    return {
+      totalTickets,
+      totalCost,
+      adultTickets,
+      childTickets,
+      infantTickets,
+      totalSeats,
+    };
   }
 
-  validateTicketPurchase(totalTickets, adultTickets, childTickets, infantTickets) {
+  validateTicketPurchase(
+    totalTickets,
+    adultTickets,
+    childTickets,
+    infantTickets
+  ) {
     if (totalTickets > 25) {
-      throw new InvalidPurchaseException("Cannot purchase more than 25 tickets at a time");
+      throw new InvalidPurchaseException(
+        "Cannot purchase more than 25 tickets at a time"
+      );
     }
 
     if ((childTickets > 0 || infantTickets > 0) && adultTickets === 0) {
-      throw new InvalidPurchaseException("Child and Infant tickets cannot be purchased without an Adult ticket");
+      throw new InvalidPurchaseException(
+        "Child and Infant tickets cannot be purchased without an Adult ticket"
+      );
     }
   }
 
-  generatePurchaseMessage(adultTickets, childTickets, infantTickets, totalCost, totalSeats) {
+  generatePurchaseMessage(
+    adultTickets,
+    childTickets,
+    infantTickets,
+    totalCost,
+    totalSeats
+  ) {
     return `Cost for ${adultTickets} adults, ${childTickets} children and ${infantTickets} infants is: £${totalCost}. Number of Seats reserved: ${totalSeats}`;
   }
 

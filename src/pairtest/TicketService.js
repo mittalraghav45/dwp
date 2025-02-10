@@ -16,7 +16,7 @@ export default class TicketService {
     let infantTickets = 0;
     let totalSeats = 0;
 
-    ticketTypeRequests.forEach((request) => {
+    ticketTypeRequests.forEach((request) => { 
       const type = request.getTicketType();
       const count = request.getNoOfTickets();
 

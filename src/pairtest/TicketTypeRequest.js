@@ -6,11 +6,8 @@ export default class TicketTypeRequest {
   #noOfTickets;
 
   constructor(type, noOfTickets) {
-    if (!TicketTypeRequest.Types.includes(type)) {
-      
-      throw new TypeError(
-        `type must be one of ${TicketTypeRequest.Types.join(", ")}`
-      );
+    if (!TicketTypeRequest.Types.includes(type)) {      
+      throw new TypeError(`type must be one of ${TicketTypeRequest.Types.join(", ")}`);
     }
     if (noOfTickets < 0) {
       throw new TypeError("noOfTickets for Adults must be greater than 0");

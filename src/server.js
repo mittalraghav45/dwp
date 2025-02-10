@@ -8,7 +8,6 @@ app.use(express.json());
 app.post("/purchase", (req, res) => {
   try {
     const { accountId, tickets } = req.body;
-
     const ticketRequests = tickets.map(
       (ticket) => new TicketTypeRequest(ticket.type, ticket.noOfTickets)
     );

@@ -6,7 +6,7 @@ import TicketTypeRequest from "./pairtest/TicketTypeRequest.js";
 const app = express();
 app.use(express.json());
 
-app.post("/purchase", (req, res) => { 
+app.post("/purchase", (req, res) => {
   try {
     const { accountId, tickets } = req.body;
 
@@ -15,16 +15,20 @@ app.post("/purchase", (req, res) => {
     );
 
     const ticketService = new TicketService();
-    ticketService.purchaseTickets(accountId, ...ticketRequests);
-    let purchaseMessage = ticketService.purchaseTickets(accountId, ...ticketRequests);
 
-    res.status(200).send(
-        { 
-            message: purchaseMessage
-        });
+    ticketService.purchaseTickets(accountId, ...ticketRequests);
+
+    let purchaseMessage = ticketService.purchaseTickets(
+      accountId,
+      ...ticketRequests
+    );
+
+    res.status(200).send({
+      message: purchaseMessage,
+    });
   } catch (error) {
     res.status(400).send({ error: error.message });
   }
 });
- 
+
 app.listen(3000, () => console.log("Server running on port 3000"));

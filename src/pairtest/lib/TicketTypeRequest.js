@@ -24,8 +24,7 @@ export default class TicketTypeRequest {
 
   validateNoOfTickets(noOfTickets, type, accountId) {
 
-    if (Number.isInteger(accountId) && accountId >0) {
-      // console.log('heer ',accountId)
+    if (Number.isInteger(accountId) && accountId >0) { 
       if (noOfTickets < 0) {
         throw new TypeError("noOfTickets must be a positive integer");
       }
@@ -38,7 +37,6 @@ export default class TicketTypeRequest {
     }
     else{
       throw new TypeError("Account ID is incorrect");
-
     }
   }
 

@@ -31,4 +31,13 @@ app.post("/purchase", (req, res) => {
   }
 });
 
+app.use((err, req, res, next) => {
+    console.error(err.stack);  
+    res.status(500).json({ error: "Internal Server Error. Please try again later." });
+  });
+
+  app.use((req, res, next) => {
+    res.status(404).json({ error: "Route not found. Please check the URL." });
+  });
+  
 app.listen(3000, () => console.log("Server running on port 3000"));

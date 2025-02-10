@@ -45,7 +45,7 @@ export default class TicketService {
       );
     }
 
-    let message = `Cost for ${adultTickets} adults, ${childTickets} children and ${infantTickets} infants is:£${totalCost}. Number of Seats reserved:${totalSeats}`;
+    let message = `Cost for ${adultTickets} adults, ${childTickets} children and ${infantTickets} infants is:£${totalCost} .Number of Seats reserved:${totalSeats}`;
 
     const paymentService = new TicketPaymentService();
     const seatService = new SeatReservationService();

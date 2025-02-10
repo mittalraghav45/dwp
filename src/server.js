@@ -13,24 +13,21 @@ app.post("/purchase", (req, res) => {
     );
 
     const ticketService = new TicketService();
+    const purchaseMessage = ticketService.purchaseTickets(accountId, ...ticketRequests);
 
-    let purchaseMessage = ticketService.purchaseTickets(accountId,...ticketRequests);
-
-    res.status(200).send({
-      message: purchaseMessage,
-    });
+    res.status(200).send({ message: purchaseMessage });
   } catch (error) {
     res.status(400).send({ error: error.message });
   }
 });
 
 app.use((err, req, res, next) => {
-    console.error(err.stack);  
-    res.status(500).json({ error: "Internal Server Error. Please try again later." });
-  });
+  console.error(err.stack);
+  res.status(500).json({ error: "Internal Server Error. Please try again later." });
+});
 
-  app.use((req, res, next) => {
-    res.status(404).json({ error: "Route not found. Please check the URL." });
-  });
-  
+app.use((req, res) => {
+  res.status(404).json({ error: "Route not found. Please check the URL." });
+});
+
 app.listen(3000, () => console.log("Server running on port 3000"));

@@ -7,6 +7,7 @@ export default class TicketTypeRequest {
 
   constructor(type, noOfTickets) {
     if (!TicketTypeRequest.Types.includes(type)) {
+      
       throw new TypeError(
         `type must be one of ${TicketTypeRequest.Types.join(", ")}`
       );
